@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import liff from "@line/liff";
 import { Box, Flex } from "@chakra-ui/react";
 import { UserCard } from "./components/UserCard";
+import { CommonSpinner } from "./components/CommonSpinner";
 
 function App() {
   const [userId, setUserId] = useState<string>('testId');
@@ -32,7 +33,9 @@ function App() {
      align="center"
      justify="center"
     >
-      <UserCard userId={userId} liff={liffObject} />
+      <Suspense fallback={<CommonSpinner />}>
+        <UserCard userId={userId} liff={liffObject} />
+      </Suspense>
     </Flex>
   );
 }
